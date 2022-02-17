@@ -1,0 +1,25 @@
+name: Concurrency-Test
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - '*' 
+
+concurrency:
+  group: ${{ github.head_ref || github.ref_name }} 
+  cancel-in-progress: true
+
+jobs:
+  test-worklow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo variables
+        run: |
+          echo "Event name is ${{ github.event_name }}"
+          echo "Group is ${{ github.head_ref || github.ref_name }}"
+      - name: Sleep
+        run: sleep 120
+
