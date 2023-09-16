@@ -1,9 +1,6 @@
 name: Concurrency-Test
 
 on:
-  pull_request:
-    branches:
-      - '*'
   push:
     branches:
       - '*' 
@@ -19,6 +16,8 @@ jobs:
       - name: Echo variables
         run: |
           echo "Event name is ${{ github.event_name }}"
+          echo "Github-Ref is ${{ github.ref }}"
+          echo "Github-RefName is ${{ github.ref_name }}"
           echo "Group is ${{ github.head_ref || github.ref_name }}"
       - name: Sleep
         run: sleep 120
